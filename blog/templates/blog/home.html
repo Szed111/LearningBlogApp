@@ -1,0 +1,147 @@
+{% extends "blog/base.html" %}
+{% block content %}
+<!--<div class="jumbotron mb-4" style="margin-bottom: 0;padding: 0; background-image: url('/media/29493.jpg'); width: 100%; height: 450px; background-size: 100% 450px; background-repeat: no-repeat; background-position-x: 0; background-position-y: 0;">
+    <a class="navbar-brand p-3 text-light" style=" font-weight: 900;" href="{% url 'blog-home'%}"><b style="font-size: x-large; font-weight: bold;font-family: 'Courier New', monospace; ">L<sub>B</sub></b> Learning Blog</a>
+    <h6 class="Display-4 text-center ">A Blogging WebSite</h6>
+    <p class="lead">>.............</p>
+</div>-->
+<div id="demo" class="carousel slide" data-ride="carousel">
+  <ul class="carousel-indicators">
+    <li data-target="#demo" data-slide-to="0" class="active"></li>
+    <li data-target="#demo" data-slide-to="1"></li>
+    <li data-target="#demo" data-slide-to="2"></li>
+  </ul>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="https://djnagoproject.blob.core.windows.net/media/29493.jpg" alt="image" width="1100" height="500">
+      <div class="carousel-caption">
+        <!--<h3></h3>
+            <p>...</p>-->
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="https://storage.googleapis.com/gweb-uniblog-publish-prod/images/search_anchor_hero_2.max-1000x1000.jpg"
+        alt="image" width="1100" height="500">
+      <div class="carousel-caption">
+        <h3><a class="text-decoration-none" href="#SocialWar"
+            onclick="window.open('https://blog.google/products/search/search-on/')">How AI is powering a more helpful
+            Google</a></h3>
+        <!--<p>...</p>-->
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img
+        src="https://www.nokia.com/sites/default/files/styles/nokia_blog_page_image/public/blog/nokia-analytics-banner.jpg"
+        alt="image" width="1100" height="500">
+      <div class="carousel-caption">
+        <h3><a class="text-decoration-none" href="#SocialWar"
+            onclick="window.open('https://www.nokia.com/blog/study-ai-machine-learning/')">Why you should study AI and
+            Machine Learning and how I did it</a></h3>
+        <!--<p>...</p>-->
+      </div>
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#demo" data-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </a>
+  <a class="carousel-control-next" href="#demo" data-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </a>
+</div>
+<div class="container p-2">
+  <div class="mywith2 float-left">
+    {% for post in posts %}
+    <!-- <h1>{{post.title}}</h1>
+<p>{{post.author}} on {{post.date_posted}}</p>
+<p>{{post.content}}</p> -->
+    <div id="loop" class="bg-2 d-flex justify-content-start">
+      <div class="p-2"><img class="img-1" src="{{ post.author.profile.image.url }}" alt="Profile"></div>
+      <div class="p-2 w-100">
+        <a href="{% url 'user-posts' post.author.username %}" class="username-1">{{post.author}}</a>
+        <b style="color: #9c9b9b; font-weight: normal;">{{post.date_posted|date:"F d, Y"}}</b>
+        <hr>
+        <h3><a class="head-1" href="{% url 'post-detail' post.id %}" class="article-title">{{post.title}}</a></h3>
+        <p class="message-1">{{post.content}}</p>
+      </div>
+    </div>
+    <br>
+    {% endfor %}
+  </div>
+  <div class="mywith1 float-right">
+    {% for links in linkinfo %}
+    <h6>{{links.link_title}}</h6>
+    {{ links.link_format|safe|escape }}
+    <!-- <div class="border-top border-dark mb-4">
+        <a href="#SocialWar" onclick="window.open('https://www.techgig.com/')" class="nav-link"><b><span
+                    class="">T</span><span style="color: red;">G</span></b> TechGig</a>
+        <a href="#SocialWar" onclick="window.open('https://www.eckovation.com/')" class="nav-link"><i class="fa fa-book"
+                aria-hidden="true"></i></b> Eckovation</a>
+        <a href="#SocialWar" onclick="window.open('https://www.greatlearning.in/')" class="nav-link"><b><span
+                    class="">G</span><span style="color: blue;">L</span></b> Great Learning</a>
+        <a href="#SocialWar" onclick="window.open('https://www.careerindia.com/')" class="nav-link"><i
+                class="fas fa-graduation-cap"></i> CareerIndia</a>
+    </div> -->
+    {% endfor %}
+    <!-- <h6>Trending Languages <i class="fas fa-file-code"></i></h6>
+    <div class="border-top border-dark mb-4">
+        <a href="#SocialWar" onclick="window.open('https://www.javascript.com/')" class="nav-link"><i class="fab fa-js"
+                style="color: rgb(128, 126, 10);"></i> JavaScript</a>
+        <a href="#SocialWar" onclick="window.open('https://developer.apple.com/swift/')" class="nav-link"><i
+                class="fab fa-swift" style="color: orange;"></i> Swift</a>
+        <a href="#SocialWar" onclick="window.open('https://www.scala-lang.org/')" class="nav-link"><b><span
+                    style="color: red;">S</span></b> Scala</a>
+        <a href="#SocialWar" onclick="window.open('https://go.dev/')" class="nav-link"><span
+                style="color: skyblue;">Go</span></a>
+    </div>
+    <h6>Learning Code Online</h6>
+    <div class="border-top border-dark mb-4">
+        <a href="#SocialWar" onclick="window.open('https://www.w3schools.com/')" class="nav-link"><span
+                style="color: green;">W<sup>3</sup></span> W3schools</a>
+        <a href="#SocialWar" onclick="window.open('https://www.codecademy.com/')" class="nav-link"><b
+                class="text-dark"><span class="border border-dark">code</span><span
+                    class="border-bottom border-dark">cademy</span></b></a>
+        <a href="#SocialWar" onclick="window.open('https://teamtreehouse.com/')" class="nav-link"><b><span
+                    style="color: green;">TH</span></b> Treehouse</a>
+        <a href="#SocialWar" onclick="window.open('https://stackoverflow.com/')" class="nav-link"><i
+                class="fab fa-stack-overflow" style="color: orange;"></i> Stackoverflow</a>
+    </div> -->
+  </div>
+  <div class="container">
+    <div class="container bg-3">
+      {% if is_paginated %}
+      {% if page_obj.has_previous %}
+      <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+      <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+      {% endif %}
+      {% for num in page_obj.paginator.page_range %}
+      {% if page_obj.number == num %}
+      <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+      {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %} <a class="btn btn-outline-info mb-4"
+        href="?page={{ num }}">{{ num }}</a>
+        {% endif %}
+        {% endfor %}
+        {% if page_obj.has_next %}
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+        {% endif %}
+
+        {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock content %}
+
+<!--<div id="loop" class="container bg-2 d-flex justify-content-start">
+                        <div class="p-2">
+                            <img class="img-1" src="files/demo.jpeg" alt="Profile">
+                        </div>
+                        <div class="p-2 w-100">
+                            <a href="#" class="username-1">UserName</a>
+                            <b style="color: #9c9b9b; font-weight: normal;">Data</b>
+                            <hr>
+                            <h3>Message Heading</h3>
+                            <pre class="message-1">Message
+                                informantion
+                            </pre>
+                        </div>
+                </div>-->

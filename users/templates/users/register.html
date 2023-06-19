@@ -1,0 +1,43 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container p-2">
+<div class="container bg-2">
+    <form method="POST">
+        {% csrf_token %}
+        {{form|crispy}}
+        <div class="custom-control custom-checkbox mr-sm-2">
+            <input type="checkbox" class="custom-control-input" id="customControlAutosizing">
+            <label class="custom-control-label" for="customControlAutosizing"><small class="text-muted"> I have read and
+                    agree to the <a href="{% url 'blog-contributors'%}">Terms and Conditions and Privacy
+                        Policy</a></small></label>
+        </div>
+        <div class="p-3 ">
+            <button id="shommanbtn" type="submit" class="btn bg-1 text-light" disabled>Submit</button>
+        </div>
+    </form>
+
+    <br>
+    <div class="d-flex">
+        <p class="p-1">Already have an account?</p>
+        <a href="{% url 'login' %}" class="ml-2">Sign IN</a>
+    </div>
+
+</div>
+<script>
+    $(document).ready(function () {
+        $('#customControlAutosizing').click(function () {
+            if ($(this).prop("checked") == true) {
+                console.log("Checkbox is checked.");
+                $("#shommanbtn").removeAttr("disabled")
+            }
+            else if ($(this).prop("checked") == false) {
+                console.log("Checkbox is unchecked.");
+                $("#shommanbtn").attr("disabled", true)
+            }
+        });
+    });
+</script>
+</div>
+</div>
+{% endblock %}
